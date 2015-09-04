@@ -1,7 +1,57 @@
 @(message: String)
 
-@main("Welcome to Play") {
+@Main("Welcome to Play") {
+    <form class="form-horizontal" method="post" action="">
+        <div class="form-group">
+            <div class="col-lg-2">
+                <input class="form-control" type="text" name="txtCode" id="txtCode" placeholder="Code" />
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-4">
+                <input class="form-control" type="text" name="txtName" id="txtName" placeholder="Name" />
+            </div>
+        </div>
+        <div class="form-group">
+            <table class="table table-responsive" id="tbDetails">
+                <thead>
+                    <tr>
+                        <th>Phone</th>
+                        <th>Email</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
 
-    @play20.welcome(message)
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td><input type="tel" class="form-control" id="txtPhone" placeholder="Phone"/></td>
+                        <td><input type="text" class="form-control" id="txtEmail" placeholder="Email"/></td>
+                        <td><a class="btn btn-info" id="btnAddItem"><span class="glyphicon glyphicon-plus"></span></a> </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </form>
 
+    <script type="text/javascript">
+        $(function(){
+
+           // alert('tbDetail : '+$('#tbDetails > tbody').length);
+        });
+
+        $('#btnAddItem').click(function(){
+            var phone = $('#txtPhone').val();
+            var email = $('#txtEmail').val();
+            var tbLength = ($('#tbDetails > tbody > tr').length -1)+1;
+
+            var tag = '<tr>';
+            tag += '<td><input type="hidden" name="phone['+ tbLength +']" value="'+ phone +'"/><span>'+ phone +'</span> </td>';
+            tag += '<td><input type="hidden" name="email['+ tbLength +']" value="'+ email +'"/><span>'+ email +'</span> </td>';
+            tag += '</tr>';
+
+            $('#tbDetails').append(tag);
+        });
+    </script>
 }
