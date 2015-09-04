@@ -1,19 +1,23 @@
-@(message: String)
+@(message: String)(implicit flash: play.api.mvc.Flash)
 
 @Main("Welcome to Play") {
-    <form class="form-horizontal" method="post" action="">
+    <span style="color:red">@flash.get("messageError").getOrElse("")</span>
+    <form class="form-horizontal" method="post" action="@routes.Application.save()">
+
         <div class="form-group">
             <div class="col-lg-2">
-                <input class="form-control" type="text" name="txtCode" id="txtCode" placeholder="Code" />
+                <input class="form-control" type="text" name="txtMemberId" id="txtMemberId" placeholder="Member Id" />
             </div>
         </div>
+
         <div class="form-group">
             <div class="col-lg-4">
-                <input class="form-control" type="text" name="txtName" id="txtName" placeholder="Name" />
+                <input class="form-control" type="text" name="txtMemberName" id="txtMemberName" placeholder="Member Name" />
             </div>
         </div>
+
         <div class="form-group">
-            <table class="table table-responsive" id="tbDetails">
+            <table class="table table-responsive" id="tbMemberDetail">
                 <thead>
                     <tr>
                         <th>Phone</th>
@@ -33,25 +37,36 @@
                 </tfoot>
             </table>
         </div>
+
+        <div class="form-group">
+            <div class="col-lg-2">
+                <button type="submit" class="btn btn-success">Save</button>
+                <button type="reset" class="btn btn-default">Reset</button>
+            </div>
+        </div>
     </form>
 
     <script type="text/javascript">
         $(function(){
 
-           // alert('tbDetail : '+$('#tbDetails > tbody').length);
+
         });
 
         $('#btnAddItem').click(function(){
             var phone = $('#txtPhone').val();
             var email = $('#txtEmail').val();
-            var tbLength = ($('#tbDetails > tbody > tr').length -1)+1;
+            var tbLength = ($('#tbMemberDetail > tbody > tr').length -1)+1;
 
             var tag = '<tr>';
             tag += '<td><input type="hidden" name="phone['+ tbLength +']" value="'+ phone +'"/><span>'+ phone +'</span> </td>';
             tag += '<td><input type="hidden" name="email['+ tbLength +']" value="'+ email +'"/><span>'+ email +'</span> </td>';
+            tag += '<td><a class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span></a><a class="btn btn-default"><span class="glyphicon glyphicon-trash"></span></a> </td>'
             tag += '</tr>';
 
-            $('#tbDetails').append(tag);
+            $('#tbMemberDetail').append(tag);
+
+             $('#txtPhone').val('');
+            $('#txtEmail').val('');
         });
     </script>
 }
