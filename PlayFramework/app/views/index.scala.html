@@ -2,6 +2,47 @@
 
 @main("Welcome to Play") {
 
-    @play20.welcome(message)
+    <div></div>
+    <form class="form-horizontal" method="post">
+        <fieldset>
+            <legend>
+                <h1>Test Form</h1>
+            </legend>
+            <div class="form-group">
+                <label class="col-lg-2" for="txtMemberId">Member ID</label>
+                <div class="col-lg-2">
+                    <input type="text" class="form-control" id="txtMemberId" name="txtMemberId" placeholder="Member ID" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2" for="txtMemberName">Firstname - Lastname</label>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control" id="txtMemberName" name="txtMemberName" placeholder="Firstname - Lastname" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2" for="txtMemberPhone">Phone</label>
+                <div class="col-lg-3">
+                    <input type="tel" class="form-control" id="txtMemberPhone" name="txtMemberPhone" placeholder="Phone" />
+                </div>
+            </div>
+        </fieldset>
+    </form>
 
+    <div id="sandbox-container">
+        <div class="input-daterange input-group" id="datepicker">
+            <input type="text" class="input-sm form-control" name="txtStartDate" placeholder="Start Date" />
+            <span class="input-group-addon">to</span>
+            <input type="text" class="input-sm form-control" name="txtEndDate" placeholder="End Date"/>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $('#sandbox-container .input-daterange').datepicker({
+            format: "dd/mm/yyyy",
+            todayBtn: "linked",
+            clearBtn: true,
+            toggleActive: true
+        });
+    </script>
 }
